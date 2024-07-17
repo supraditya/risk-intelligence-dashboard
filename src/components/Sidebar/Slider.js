@@ -27,9 +27,16 @@ const Slider = () => {
       />
       <div className="flex justify-between mt-2">
         <span>1</span>
+        <span
+          className={
+            value > 1 && value < 5 ? `absolute z-50 text-center` : "hidden"
+          }
+          style={{ marginLeft: `calc(${(value - 1) * 20 - 1}% + 5px` }}
+        >
+          {value}
+        </span>
         <span>5</span>
       </div>
-      {/* <div className="mt-2 text-center">{value}</div> */}
     </div>
   );
 };

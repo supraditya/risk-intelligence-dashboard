@@ -11,7 +11,7 @@ const MainReport = () => {
   return (
     <div className={styles.container}>
       <h1 className={`${styles['text-4xl']} ${styles['font-bold']} ${styles['text-center']} ${styles['my-4']}`}>
-        National healthcare databases are compromised
+        Risk Title
       </h1>
       <div className={`${styles.flex} ${styles['justify-center']} ${styles['space-x-2']} ${styles['my-4']}`}>
         <span className={`${styles['bg-blue-500']} ${styles['text-white']} ${styles['px-2']} ${styles['py-1']} ${styles.rounded}`}>Healthcare</span>
@@ -21,15 +21,11 @@ const MainReport = () => {
       <RiskDetails riskRanking="#1" impactFrequency={freqScore} impactSeverity={sevScore} />
       <h2 className={`${styles['text-2xl']} ${styles['font-semibold']} ${styles['mt-8']}`}>Summary</h2>
       <p className={styles['my-4']}>
-        Unauthorized access to national healthcare databases could lead to significant
-        breaches of patient confidentiality, data corruption, and potential misuse of
-        sensitive health information. This could result in legal ramifications, financial
-        loss, and damage to public trust in the healthcare system.
+        Description of Risk
       </p>
       <div className={`${styles.flex} ${styles['justify-around']} ${styles['mt-8']}`}>
         <div className={`${styles['w-1/2']} ${styles.p-4}`}>
-          <h3 className={`${styles['text-xl']} ${styles['font-semibold']}`}>Affected Regions</h3>
-          <img src="/path/to/affected-regions.png" alt="Affected Regions" />
+          <h3 className={`${styles['text-xl']} ${styles['font-semibold']}`}>Affected Regions (map)</h3>
         </div>
         <div className={`${styles['w-1/2']} ${styles.p-4}`}>
           <h3 className={`${styles['text-xl']} ${styles['font-semibold']} ${styles['text-center']}`}>Risk Heatmap</h3>

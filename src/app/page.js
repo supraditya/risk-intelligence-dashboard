@@ -8,8 +8,8 @@ export default function Home() {
     <div>
       <Navbar/>
       <Sidebar/>
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <RiskMatrix freqScore={3} sevScore={5}/>
+      <main className="flex min-h-screen flex-col items-center justify-between p-10">
+        <RiskMatrix freqScore={1} sevScore={5}/>
       </main>
     </div>
   );

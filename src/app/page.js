@@ -41,7 +41,8 @@ export default function Home() {
               <RiskMatrix freqScore={freqScore} sevScore={sevScore} />
             </div>
           </div>
-          <h2 className={`${styles['text-2xl']} ${styles['font-primary']} ${styles['font-semibold']} ${styles['mt-8']}`}>Articles Referenced</h2>
+          <h2 className="text-2xl font-primary font-semibold mt-8">Articles Referenced</h2>
+          {/* <h2 className={`${styles['text-2xl']} ${styles['font-primary']} ${styles['font-semibold']} ${styles['mt-8']}`}>Articles Referenced</h2> */}
           <ol className={`${styles['list-decimal']} ${styles['list-inside']} ${styles['my-4']} ${styles['font-primary']}`}>
             <li>
               <a href="https://example.com/article1" className={`${styles['text-blue-500']} ${styles.underline}`}>

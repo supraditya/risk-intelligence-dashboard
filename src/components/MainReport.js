@@ -14,9 +14,9 @@ const MainReport = () => {
         Risk Title
       </h1>
       <div className={`${styles.flex} ${styles['justify-center']} ${styles['space-x-2']} ${styles['my-4']}`}>
-        <span className={`${styles['bg-blue-500']} ${styles['text-white']} ${styles['px-2']} ${styles['py-1']} ${styles.rounded}`}>Healthcare</span>
-        <span className={`${styles['bg-blue-500']} ${styles['text-white']} ${styles['px-2']} ${styles['py-1']} ${styles.rounded}`}>Cybersecurity</span>
-        <span className={`${styles['bg-blue-500']} ${styles['text-white']} ${styles['px-2']} ${styles['py-1']} ${styles.rounded}`}>United States</span>
+        <span className={`${styles['bg-blue-500']} ${styles['text-white']} ${styles['px-2']} ${styles['py-1']} ${styles.rounded}`}>Theme</span>
+        <span className={`${styles['bg-blue-500']} ${styles['text-white']} ${styles['px-2']} ${styles['py-1']} ${styles.rounded}`}>Theme</span>
+        <span className={`${styles['bg-blue-500']} ${styles['text-white']} ${styles['px-2']} ${styles['py-1']} ${styles.rounded}`}>Theme</span>
       </div>
       <RiskDetails riskRanking="#1" impactFrequency={freqScore} impactSeverity={sevScore} />
       <h2 className={`${styles['text-2xl']} ${styles['font-semibold']} ${styles['mt-8']}`}>Summary</h2>

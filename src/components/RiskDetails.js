@@ -5,7 +5,7 @@ const RiskDetails = ({ riskRanking, impactFrequency, impactSeverity }) => {
   return (
     <div className="flex justify-around my-8 space-x-4">
       <div className="text-center">
-        <p className="text-3xl font-primary font-bold">{riskRanking}</p>
+        <p className="text-3xl font-primary font-bold">#{riskRanking}</p>
         <p className="text-xl font-primary">Risk Ranking</p>
       </div>
       <div className="text-center">

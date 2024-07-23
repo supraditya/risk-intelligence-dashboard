@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-const RiskMatrix = ({ freqScore, sevScore }) => {
+const RiskMatrix = ({ freqScore, sevScore, scaleUp = false }) => {
   const [freqColor, setFreqColor] = useState("green");
   const [sevColor, setSevColor] = useState("green");
 
@@ -43,7 +43,7 @@ const RiskMatrix = ({ freqScore, sevScore }) => {
     return "bg-gray-400";
   };
   return (
-    <div>
+    <div className={scaleUp ? "scale-125" : ""}>
       <p className="font-primary font-medium text-sm w-min -translate-x-14 translate-y-16 pr-6 pb-4 text-center -rotate-90">
         Frequency
       </p>

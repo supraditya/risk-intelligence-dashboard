@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       colors: {
         'primary-blue': '#006CD0',
-        'primary-blue-dark': '#FFD700',
+        'primary-blue-dark': '#054886',
         'matrix-red':'#E10000',
         'matrix-yellow':'#F89500',
         'matrix-green':'#008F0E',

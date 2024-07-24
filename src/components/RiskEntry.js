@@ -16,7 +16,7 @@ const RiskEntry = ({ resultClicked = false }) => {
       } flex my-8 pr-8 items-center justify-around cursor-pointer`}
     >
       <p className="text-4xl font-primary text-center font-bold">1</p>
-      <div className="w-2/3">
+      <div className={resultClicked ? 'w-4/5':'w-2/3'}>
         <p
           className={`${
             hovering ? "underline" : ""

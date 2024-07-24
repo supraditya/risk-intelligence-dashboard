@@ -17,7 +17,7 @@ export default function Home() {
       <Navbar />
       <Sidebar selectedTopics={selectedTopics} setSelectedTopics={setSelectedTopics} />
       <main className="flex float-right justify-end h-[90.3vh] w-3/4 items-center  overflow-y-scroll">
-        <div className={`${resultClicked ? 'w-1/2 h-[90.3vh] pt-6 overflow-y-scroll' : 'w-full pt-[21rem]'} flex pl-8 flex-col`}>
+        <div className={`${resultClicked ? 'w-1/2':'w-full'} h-[90.3vh] overflow-y-scroll pt-6 flex pl-8 flex-col`}>
           <p className="text-2xl font-primary font-semibold">
             {selectedTopics.length > 0 ? (
               <span>Selected topics: {selectedTopics.join(', ')}</span>

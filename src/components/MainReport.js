@@ -2,10 +2,25 @@
 import React from "react";
 import RiskMatrix from "./RiskMatrix";
 import Chip from "./Chip";
+import WorldMap from "react-svg-worldmap";
 
 const MainReport = () => {
   const freqScore = 3; // Example score, replace with actual data
   const sevScore = 5; // Example score, replace with actual data
+
+  // Test data for world map component
+  const data = [
+    { country: "cn", value:"" }, // china
+    { country: "in", value:"" }, // india
+    { country: "us", value:"" }, // united states
+    { country: "id", value:"" }, // indonesia
+    { country: "pk", value:"" }, // pakistan
+    { country: "br", value:"" }, // brazil
+    { country: "ng", value:"" }, // nigeria
+    { country: "bd", value:"" }, // bangladesh
+    { country: "ru", value:"" }, // russia
+    { country: "mx", value:"" }, // mexico
+  ];
 
   return (
     <div className="w-1/2 border h-[90.3vh] overflow-y-scroll px-8 bg-white shadow-sm pt-12">
@@ -41,18 +56,34 @@ const MainReport = () => {
         issue means exactly. If it were to be realized, healthcare would be
         inaccessible to many people, and the world would be a much sadder.
       </p>
-      <div className="flex justify-around mt-8">
+      <div className="flex flex-wrap justify-around mt-8">
         <div className="w-1/2">
-          <h3 className="text-xl font-primary font-semibold">Affected Regions</h3>
+          <h3 className="text-xl font-primary font-semibold">
+            Affected Regions
+          </h3>
+          <WorldMap
+            borderColor="#000000"
+            strokeOpacity="0.9"
+            color="#006CD0"
+            value-suffix="people"
+            size="sm"
+            data={data}
+          />
         </div>
         <div className="w-1/2">
           <h3 className="text-xl font-primary font-semibold">Risk Heatmap</h3>
           <div className="w-fit pl-12">
-            <RiskMatrix freqScore={freqScore} sevScore={sevScore} scaleUp={true} />
+            <RiskMatrix
+              freqScore={freqScore}
+              sevScore={sevScore}
+              scaleUp={true}
+            />
           </div>
         </div>
       </div>
-      <h2 className="text-2xl font-semibold font-primary mt-8">Articles Referenced</h2>
+      <h2 className="text-2xl font-semibold font-primary mt-8">
+        Articles Referenced
+      </h2>
       <ol className="list-decimal text-base list-inside my-4 font-secondary">
         <li>
           <a

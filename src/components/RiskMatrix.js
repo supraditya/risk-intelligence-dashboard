@@ -43,7 +43,7 @@ const RiskMatrix = ({ freqScore, sevScore, scaleUp = false }) => {
     return "bg-gray-400";
   };
   return (
-    <div className={scaleUp ? "scale-125" : ""}>
+    <div className={scaleUp ? "scale-110" : ""}>
       <p className="font-primary font-medium text-sm w-min -translate-x-14 translate-y-16 pr-6 pb-4 text-center -rotate-90">
         Frequency
       </p>

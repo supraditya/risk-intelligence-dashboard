@@ -14,6 +14,7 @@ export default function Home() {
 
   const sampleRiskData = [
     {
+      id: "1",
       title: "National healthcare databases are compromised",
       tags: ["Cybersecurity", "Healthcare", "Data Breach"],
       risk_ranking: "1",
@@ -45,6 +46,7 @@ export default function Home() {
       ],
     },
     {
+      id: "2",
       title: "Sample Risk Entry 2",
       tags: ["Tag1", "Tag2", "Tag3"],
       risk_ranking: "2",
@@ -64,6 +66,7 @@ export default function Home() {
       ],
     },
     {
+      id: "3",
       title: "Sample Risk Entry 3",
       tags: ["Tag4", "Tag5", "Tag6"],
       risk_ranking: "3",
@@ -94,8 +97,8 @@ export default function Home() {
       <main className="flex float-right justify-end h-[90.3vh] w-3/4 items-center  overflow-y-scroll">
         <div
           className={`${
-            selectedRisk ? "w-1/2" : "w-full"
-          } h-[90.3vh] overflow-y-scroll pt-6 flex pl-8 flex-col`}
+            selectedRisk ? "w-1/2 px-4" : "w-full pl-8"
+          } h-[90.3vh] overflow-y-scroll pt-6 flex  flex-col`}
         >
           <p className="text-2xl font-primary font-semibold">
             {selectedTopics.length > 0 ? (

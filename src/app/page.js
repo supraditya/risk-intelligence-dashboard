@@ -5,32 +5,110 @@ import RiskMatrix from "@/components/RiskMatrix";
 import MainReport from "@/components/MainReport";
 import RiskEntry from "@/components/RiskEntry";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function Home() {
-  const freqScore = 3; // Example score, replace with actual data
-  const sevScore = 5; // Example score, replace with actual data
-  const [resultClicked, setresultClicked] = useState(true);
+  const selectedRisk = useSelector((state) => state.selectedRisk);
   const [selectedTopics, setSelectedTopics] = useState([]);
+
+
+  const sampleRiskData = [
+    {
+      title: "National healthcare databases are compromised",
+      tags: ["Cybersecurity", "Healthcare", "Data Breach"],
+      risk_ranking: "1",
+      sevScore: 3,
+      freqScore: 5,
+      summary:
+        "This is a very long, if not unnecessarily long description of what this issue means exactly. If it were to be realized, healthcare would be inaccessible to many people, and the world would be a much sadder.",
+      regions: [
+        "cn",
+        "in",
+        "us",
+        "id",
+        "pk",
+        "br",
+        "ng",
+        "bd",
+        "ru",
+        "mx",
+      ],
+      references: [
+        {
+          title: "Cybersecurity and Infrastructure Security Agency",
+          link: "https://www.cisa.gov/",
+        },
+        {
+          title: "Healthcare and Public Health Sector",
+          link: "https://www.cisa.gov/healthcare-public-health-sector",
+        },
+      ],
+    },
+    {
+      title: "Sample Risk Entry 2",
+      tags: ["Tag1", "Tag2", "Tag3"],
+      risk_ranking: "2",
+      sevScore: 4,
+      freqScore: 2,
+      summary: "This is a sample summary for risk entry 2.",
+      regions: ["us", "ca", "uk"],
+      references: [
+        {
+          title: "Reference 1",
+          link: "https://www.example.com/reference1",
+        },
+        {
+          title: "Reference 2",
+          link: "https://www.example.com/reference2",
+        },
+      ],
+    },
+    {
+      title: "Sample Risk Entry 3",
+      tags: ["Tag4", "Tag5", "Tag6"],
+      risk_ranking: "3",
+      sevScore: 1,
+      freqScore: 3,
+      summary: "This is a sample summary for risk entry 3.",
+      regions: ["au", "nz", "jp"],
+      references: [
+        {
+          title: "Reference 3",
+          link: "https://www.example.com/reference3",
+        },
+        {
+          title: "Reference 4",
+          link: "https://www.example.com/reference4",
+        },
+      ],
+    },
+  ];
 
   return (
     <div>
       <Navbar />
-      <Sidebar selectedTopics={selectedTopics} setSelectedTopics={setSelectedTopics} />
+      <Sidebar
+        selectedTopics={selectedTopics}
+        setSelectedTopics={setSelectedTopics}
+      />
       <main className="flex float-right justify-end h-[90.3vh] w-3/4 items-center  overflow-y-scroll">
-        <div className={`${resultClicked ? 'w-1/2':'w-full'} h-[90.3vh] overflow-y-scroll pt-6 flex pl-8 flex-col`}>
+        <div
+          className={`${
+            selectedRisk ? "w-1/2" : "w-full"
+          } h-[90.3vh] overflow-y-scroll pt-6 flex pl-8 flex-col`}
+        >
           <p className="text-2xl font-primary font-semibold">
             {selectedTopics.length > 0 ? (
-              <span>Selected topics: {selectedTopics.join(', ')}</span>
+              <span>Selected topics: {selectedTopics.join(", ")}</span>
             ) : (
               <span>3 results found for “cybersecurity”</span>
             )}
           </p>
-          <RiskEntry resultClicked={resultClicked} />
-          <RiskEntry resultClicked={resultClicked} />
-          <RiskEntry resultClicked={resultClicked} />
-          <RiskEntry resultClicked={resultClicked} />
+            {sampleRiskData.map((data, index) => (
+              <RiskEntry key={index} data={data} />
+            ))}
         </div>
-        {resultClicked && <MainReport />}
+        {selectedRisk && <MainReport />}
       </main>
     </div>
   );

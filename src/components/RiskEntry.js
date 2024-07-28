@@ -2,8 +2,13 @@
 import { useState } from "react";
 import Chip from "./Chip";
 import RiskMatrix from "./RiskMatrix";
-const RiskEntry = ({ resultClicked = false }) => {
+import { useSelector, useDispatch } from "react-redux";
+import { setSelectedRisk } from "@/lib/selectedRiskSlice";
+const RiskEntry = ({ data }) => {
   const [hovering, setHovering] = useState(false);
+  const selectedRisk = useSelector((state) => state.selectedRisk);
+
+  const dispatch = useDispatch();
 
   return (
     <div
@@ -12,30 +17,27 @@ const RiskEntry = ({ resultClicked = false }) => {
         setHovering(false);
       }}
       className={`${
-        resultClicked ? "max-h-80" : "max-h-40"
+        selectedRisk ? "max-h-80" : "max-h-40"
       } flex my-8 pr-8 items-center justify-around cursor-pointer`}
+      onClick={() => dispatch(setSelectedRisk(data))}
     >
-      <p className="text-4xl font-primary text-center font-bold">1</p>
-      <div className={resultClicked ? 'w-4/5':'w-2/3'}>
+      <p className="text-4xl font-primary text-center font-bold">{data.risk_ranking}</p>
+      <div className={selectedRisk ? "w-4/5" : "w-2/3"}>
         <p
           className={`${
             hovering ? "underline" : ""
           } font-primary font-semibold text-3xl mb-1 line-clamp-2`}
         >
-          National healthcare databases are compromised
+          {data.title}
         </p>
-        <p className="font-secondary text-base line-clamp-2">
-          This is a very long, if not unnecessarily long description of what
-          this issue means exactly. If it were to be realized, healthcare would
-          be inaccessible to many people, and the world would be a much sadder.
-        </p>
-        <Chip key="1" text="Cybersecurity" resultClicked={resultClicked} />
-        <Chip key="2" text="Healthcare" resultClicked={resultClicked} />
-        <Chip key="3" text="Data Breach" resultClicked={resultClicked} />
+        <p className="font-secondary text-base line-clamp-2">{data.summary}</p>
+        {data.tags.map((tag, index) => (
+          <Chip key={index} text={tag} />
+        ))}
       </div>
-      {!resultClicked && (
+      {!selectedRisk && (
         <div className="mb-5">
-          <RiskMatrix freqScore={3} sevScore={5} />
+          <RiskMatrix freqScore={data.freqScore} sevScore={data.sevScore} />
         </div>
       )}
     </div>

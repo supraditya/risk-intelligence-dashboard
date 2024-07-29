@@ -17,6 +17,17 @@ const topicsList = [
   "ESG",
   "Geopolitical",
   "Mental Health",
+  "NIL",
+  "Physical Security",
+  "Policy",
+  "Prop 2",
+  "Residential Life",
+  "Safety",
+  "Sexual Misconduct",
+  "Succession Planning",
+  "Third Parties",
+  "Title IX",
+  "Workforce Management"
 ];
 
 const Sidebar = ({ selectedTopics, setSelectedTopics }) => {

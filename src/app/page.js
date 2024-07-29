@@ -1,7 +1,6 @@
 "use client";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar/Sidebar";
-import RiskMatrix from "@/components/RiskMatrix";
 import MainReport from "@/components/MainReport";
 import RiskEntry from "@/components/RiskEntry";
 import { useState } from "react";
@@ -94,7 +93,7 @@ export default function Home() {
         selectedTopics={selectedTopics}
         setSelectedTopics={setSelectedTopics}
       />
-      <main className="flex float-right justify-end h-[90.3vh] w-3/4 items-center  overflow-y-scroll">
+      <main className="flex float-right justify-end h-[90.3vh] w-3/4 items-center  overflow-y-hidden">
         <div
           className={`${
             selectedRisk ? "w-1/2 px-4" : "w-full pl-8"

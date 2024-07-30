@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import selectedRiskSlice from './selectedRiskSlice'
+import riskSlice from './selectedRiskSlice'
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      selectedRisk: selectedRiskSlice,
+      risk: riskSlice,
     },
   })
 }

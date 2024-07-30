@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setSelectedRisk } from "@/lib/selectedRiskSlice";
 const RiskEntry = ({ data }) => {
   const [hovering, setHovering] = useState(false);
-  const selectedRisk = useSelector((state) => state.selectedRisk);
+  const selectedRisk = useSelector((state) => state.risk.selected);
 
   const dispatch = useDispatch();
 

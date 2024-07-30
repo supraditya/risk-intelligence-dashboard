@@ -9,7 +9,7 @@ const MainReport = () => {
   const freqScore = 3; // Example score, replace with actual data
   const sevScore = 5; // Example score, replace with actual data
 
-  const selectedRisk = useSelector((state) => state.selectedRisk);
+  const selectedRisk = useSelector((state) => state.risk.selected);
 
   // region data formatted to fit WorldMap component
   const regionData = selectedRisk.regions.map((region) => {

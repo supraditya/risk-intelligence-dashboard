@@ -1,18 +1,55 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import db from "./firebase";
+import { ref, get } from 'firebase/database';
 
-const selectedRiskSlice = createSlice({
-    name: 'selectedRisk',
-    initialState: null,
-    reducers: {
-        setSelectedRisk: (state, action) => {
-            return action.payload;
-        },
-        clearSelectedRisk: (state) => {
-            return null;
-        },
+export const fetchRiskData = createAsyncThunk(
+  "riskData/fetchData",
+  async (_, { rejectWithValue }) => {
+    try {
+      const dataRef = ref(db, "/"); // Replace with your data path
+      const snapshot = await get(dataRef);
+      const data = snapshot.val();
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+const riskSlice = createSlice({
+  name: "risk",
+  initialState: {
+    items: null,
+    loading: false,
+    error: null,
+    selected: null,
+  },
+  reducers: {
+    setSelectedRisk: (state, action) => {
+      state.selected = action.payload;
     },
+    clearSelectedRisk: (state) => {
+      state.selected = null;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchRiskData.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchRiskData.fulfilled, (state, action) => {
+        state.items = action.payload;
+        console.log(action.payload)
+        state.loading = false;
+      })
+      .addCase(fetchRiskData.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = false;
+      });
+  },
 });
 
-export const { setSelectedRisk, clearSelectedRisk } = selectedRiskSlice.actions;
+export const { setSelectedRisk, clearSelectedRisk } = riskSlice.actions;
 
-export default selectedRiskSlice.reducer;
+export default riskSlice.reducer;

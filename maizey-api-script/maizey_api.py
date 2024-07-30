@@ -1,10 +1,7 @@
-import requests
-import os
+import requests, json, os
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
-import json
-
 
 def create_conversation(project_pk, api_key):
     base_url = 'https://umgpt.umich.edu/maizey/api/projects/'
@@ -54,8 +51,10 @@ def call_api(project_pk, conversation_pk, api_key, topic):
 
 
 def push_to_db(data):
-    # Path to your service account key JSON file
-    cred = credentials.Certificate("/mnt/c/Users/liyufeim/risk intelligence/risk-intel-firebase-cred.json") # TODO: Change this to the path of the service account key JSON file
+    # Fetch the dictionary from the service account key JSON file
+    # TODO: fetch this dictionary from Cyberark?? - Estelle will check if this is possible
+    contents_dict = json.loads("C:/Users/eduguet/intern_projects/Safe-DO NOT COMMIT/serviceAccountKey.json")
+    cred = credentials.Certificate(contents_dict) # TODO: Change this to the path of the service account key JSON file
 
     # Initialize the app with a service account, granting admin privileges
     firebase_admin.initialize_app(cred, {

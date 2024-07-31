@@ -1,6 +1,4 @@
-// const fs = require('fs');
-// require('dotenv').config();
-import { API_KEY, PROJECT_PK } from "../../Secrets";
+
 
 async function createConversation(PROJECT_PK, API_KEY) {
   const baseUrl = "https://umgpt.umich.edu/maizey/api/projects/";
@@ -80,9 +78,9 @@ async function callApi(PROJECT_PK, conversationPk, API_KEY, topic) {
 
 export async function repopulateDb() {
   console.log("Starting");
-  // const PROJECT_PK = process.env.PROJECT_PK;
+  const PROJECT_PK = process.env.NEXT_PUBLIC_PROJECT_PK;
   console.log(PROJECT_PK);
-  // const API_KEY = process.env.API_KEY;
+  const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
   const conversationPk = await createConversation(PROJECT_PK, API_KEY);
   console.log(conversationPk);
   if (!conversationPk) {

@@ -8,7 +8,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchRiskData } from "@/lib/selectedRiskSlice";
 
 export default function Home() {
-  const { items, loading, error, selected } = useSelector((state) => state.risk);
+  const { items, loading, error, selected } = useSelector(
+    (state) => state.risk
+  );
   const [selectedTopics, setSelectedTopics] = useState([]);
   const dispatch = useDispatch();
 
@@ -26,18 +28,8 @@ export default function Home() {
       freqScore: 5,
       summary:
         "This is a very long, if not unnecessarily long description of what this issue means exactly. If it were to be realized, healthcare would be inaccessible to many people, and the world would be a much sadder.",
-      regions: [
-        "cn",
-        "in",
-        "us",
-        "id",
-        "pk",
-        "br",
-        "ng",
-        "bd",
-        "ru",
-        "mx",
-      ],
+      regions: ["cn", "in", "us", "id", "pk", "br", "ng", "bd", "ru", "mx"],
+
       references: [
         {
           title: "Cybersecurity and Infrastructure Security Agency",
@@ -108,12 +100,13 @@ export default function Home() {
             {selectedTopics.length > 0 ? (
               <span>Selected topics: {selectedTopics.join(", ")}</span>
             ) : (
-              <span>3 results found for “cybersecurity”</span>
+              <span>{items && items.length} results found</span>
             )}
           </p>
-            {sampleRiskData.map((data, index) => (
-              <RiskEntry key={index} data={data} />
-            ))}
+          {loading && <p>Loading...</p>}
+          {!loading &&
+            items &&
+            items.map((risk, index) => <RiskEntry key={index} risk={risk} />)}
         </div>
         {selected && <MainReport />}
       </main>

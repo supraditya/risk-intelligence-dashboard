@@ -35,25 +35,25 @@ const MainReport = () => {
         {selectedRisk.title}
       </h1>
       <div className="flex my-2">
-        {selectedRisk.tags.map((tag, index) => (
+        {/* {selectedRisk.tags.map((tag, index) => (
           <Chip key={index} text={tag} />
-        ))}
+        ))} */}
       </div>
       <div className="flex justify-around my-8 space-x-6">
         <div className="text-center">
-          <p className="text-5xl font-primary">#{selectedRisk.risk_ranking}</p>
+          <p className="text-5xl font-primary">#{selectedRisk.likelihood}</p>
           <p className="text-xl font-primary">Risk Ranking</p>
         </div>
         <div className="text-center">
           <p className="text-5xl font-primary">
-            {selectedRisk.freqScore}
+            {selectedRisk.likelihood}
             <span className="text-3xl">/5</span>
           </p>
           <p className="text-xl font-primary">Impact Frequency</p>
         </div>
         <div className="text-center">
           <p className="text-5xl font-primary">
-            {selectedRisk.sevScore}
+            {selectedRisk.severity}
             <span className="text-3xl">/5</span>
           </p>
           <p className="text-xl font-primary">Impact Severity</p>
@@ -79,8 +79,8 @@ const MainReport = () => {
           <h3 className="text-xl font-primary font-semibold">Risk Heatmap</h3>
           <div className="w-fit pl-12">
             <RiskMatrix
-              freqScore={selectedRisk.freqScore}
-              sevScore={selectedRisk.sevScore}
+              freqScore={selectedRisk.likelihood}
+              sevScore={selectedRisk.severity}
               scaleUp={true}
             />
           </div>
@@ -89,8 +89,9 @@ const MainReport = () => {
       <h2 className="text-2xl font-semibold font-primary mt-8">
         Articles Referenced
       </h2>
-      <ol className="list-decimal text-base list-inside my-4 font-secondary">
-        {selectedRisk.references.map((reference, index) => (
+      
+      {/* <ol className="list-decimal text-base list-inside my-4 font-secondary">
+        {selectedRisk.data_sources.map((reference, index) => (
           <li key={index}>
             <a
               href={reference.link}
@@ -102,7 +103,7 @@ const MainReport = () => {
             </a>
           </li>
         ))}
-      </ol>
+      </ol> */}
     </div>
   );
 };

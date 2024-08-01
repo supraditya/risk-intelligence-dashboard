@@ -34,10 +34,10 @@ const MainReport = () => {
       <h1 className="text-4xl font-primary font-medium my-2">
         {selectedRisk.title}
       </h1>
-      <div className="flex my-2">
-        {/* {selectedRisk.tags.map((tag, index) => (
+      <div className="flex flex-wrap my-2">
+        {selectedRisk.industries.map((tag, index) => (
           <Chip key={index} text={tag} />
-        ))} */}
+        ))}
       </div>
       <div className="flex justify-around my-8 space-x-6">
         <div className="text-center">
@@ -61,49 +61,37 @@ const MainReport = () => {
       </div>
       <h2 className="text-2xl font-primary font-semibold">Summary</h2>
       <p className="my-2 font-secondary text-lg">{selectedRisk.summary}</p>
-      <div className="flex flex-wrap justify-around mt-8">
-        <div className="w-1/2">
-          <h3 className="text-xl font-primary font-semibold">
-            Affected Regions
-          </h3>
-          <WorldMap
-            borderColor="#000000"
-            strokeOpacity="0.9"
-            color="#006CD0"
-            value-suffix="people"
-            size="sm"
-            data={regionData}
+      <div className="flex flex-col flex-wrap items-center justify-around mt-8">
+        <h3 className="text-xl font-primary font-semibold">Affected Regions</h3>
+        <WorldMap
+          borderColor="#000000"
+          strokeOpacity="0.9"
+          color="#006CD0"
+          value-suffix="people"
+          size="lg"
+          data={regionData}
+        />
+        <h3 className="text-xl font-primary font-semibold">Risk Heatmap</h3>
+        <div className="w-fit mb-10">
+          <RiskMatrix
+            freqScore={selectedRisk.likelihood}
+            sevScore={selectedRisk.severity}
+            scaleUp={true}
           />
-        </div>
-        <div className="w-1/2">
-          <h3 className="text-xl font-primary font-semibold">Risk Heatmap</h3>
-          <div className="w-fit pl-12">
-            <RiskMatrix
-              freqScore={selectedRisk.likelihood}
-              sevScore={selectedRisk.severity}
-              scaleUp={true}
-            />
-          </div>
         </div>
       </div>
       <h2 className="text-2xl font-semibold font-primary mt-8">
         Articles Referenced
       </h2>
-      
-      {/* <ol className="list-decimal text-base list-inside my-4 font-secondary">
-        {selectedRisk.data_sources.map((reference, index) => (
-          <li key={index}>
-            <a
-              href={reference.link}
-              className="text-blue-500 underline"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {reference.title}
-            </a>
-          </li>
-        ))}
-      </ol> */}
+      <p className="font-secondary italic">
+        (Titles match Knowledge Base Articles in Google Drive)
+      </p>
+      <ol className="list-decimal text-base list-inside mt-2 mb-4 font-secondary">
+        {selectedRisk.data_sources &&
+          selectedRisk.data_sources.map((reference, index) => (
+            <li key={index}>{reference}</li>
+          ))}
+      </ol>
     </div>
   );
 };

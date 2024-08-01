@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-// import Chip from "./Chip";
+import Chip from "./Chip";
 import RiskMatrix from "./RiskMatrix";
 import { useSelector, useDispatch } from "react-redux";
 import { setSelectedRisk } from "@/lib/selectedRiskSlice";
@@ -9,8 +9,7 @@ const RiskEntry = ({ risk }) => {
   const selectedRisk = useSelector((state) => state.risk.selected);
 
   const dispatch = useDispatch();
-  // console.log(data);
-
+  
   return (
     <div
       className={`${
@@ -53,12 +52,12 @@ const RiskEntry = ({ risk }) => {
             {risk.summary}
           </p>
           {/* <p>{risk.industries}</p> */}
-          {/* {risk.industries.map((tag, index) => {
+          {risk.industries && risk.industries.map((tag, index) => {
             if (selectedRisk && selectedRisk.id === risk.id) {
-              return <Chip key={index} text={tag} selected={true} />;
+              return <Chip key={index} text={tag} selected={true} oneline={true} />;
             }
-            return <Chip key={index} text={tag} />;
-          })} */}
+            return <Chip key={index} text={tag} oneline={true} />;
+          })}
         </div>
         {!selectedRisk && (
           <div className="mb-5">

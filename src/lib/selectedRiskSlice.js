@@ -40,7 +40,6 @@ const riskSlice = createSlice({
       })
       .addCase(fetchRiskData.fulfilled, (state, action) => {
         state.items = action.payload;
-        // console.log(action.payload[0])
         state.loading = false;
       })
       .addCase(fetchRiskData.rejected, (state, action) => {

@@ -44,7 +44,7 @@ const Sidebar = ({ selectedTopics, setSelectedTopics }) => {
       <h1 className="text-lg font-primary font-bold mt-2">Filters</h1>
       <h1 className="text-base font-primary mt-2">Minimum Impact Severity</h1>
       <Slider />
-      <h1 className="text-base font-primary mt-2">Minimum Impact Frequency</h1>
+      <h1 className="text-base font-primary mt-2">Minimum Impact Likelihood</h1>
       <Slider />
       <h1 className="text-lg font-primary font-bold mt-2">Topics</h1>
       <div className="mt-2">

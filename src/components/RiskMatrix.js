@@ -45,7 +45,7 @@ const RiskMatrix = ({ freqScore, sevScore, scaleUp = false }) => {
   return (
     <div className={scaleUp ? "scale-150 " : ""}>
       <p className="font-primary font-medium text-sm w-min -translate-x-14 translate-y-16 pr-6 pb-4 text-center -rotate-90">
-        Frequency
+        Likelihood
       </p>
       <div className="grid grid-cols-5 gap-1">
         {Array.from({ length: 25 }).map((_, index) => (

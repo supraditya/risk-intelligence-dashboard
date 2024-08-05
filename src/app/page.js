@@ -96,14 +96,22 @@ export default function Home() {
             selected ? "w-1/2 px-4" : "w-full pl-8"
           } h-[90.3vh] overflow-y-scroll pt-6 flex  flex-col`}
         >
-          <p className="text-2xl font-primary font-semibold">
-            {selectedTopics.length > 0 ? (
-              <span>Selected topics: {selectedTopics.join(", ")}</span>
-            ) : (
-              <span>{items && items.length} results found</span>
-            )}
-          </p>
-          {loading && <p>Loading...</p>}
+          {selectedTopics.length > 0 && (
+            <div>
+              <p className="text-2xl font-primary font-semibold">
+                Selected topics:
+              </p>
+              <p className="text-xl font-primary mb-4">{selectedTopics.join(", ")}</p>
+            </div>
+          )}
+          <span className="font-primary font-semibold text-2xl">
+            {loading
+              ? "Loading..."
+              : items
+              ? items.length + " results found"
+              : ""}
+          </span>
+
           {!loading &&
             items &&
             items.map((risk, index) => <RiskEntry key={index} risk={risk} />)}

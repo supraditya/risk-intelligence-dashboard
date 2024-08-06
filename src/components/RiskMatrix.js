@@ -1,17 +1,17 @@
 "use client";
 import { useEffect, useState } from "react";
-const RiskMatrix = ({ freqScore, sevScore, scaleUp = false }) => {
-  const [freqColor, setFreqColor] = useState("green");
+const RiskMatrix = ({ likelihoodScore, sevScore, scaleUp = false }) => {
+  const [likelihoodColor, setLikelihoodColor] = useState("green");
   const [sevColor, setSevColor] = useState("green");
 
   useEffect(() => {
     // Set colors based on scores
-    if (freqScore >= 1 && freqScore <= 2) {
-      setFreqColor("bg-matrix-green");
-    } else if (freqScore === 3) {
-      setFreqColor("bg-matrix-yellow");
+    if (likelihoodScore >= 1 && likelihoodScore <= 2) {
+      setLikelihoodColor("bg-matrix-green");
+    } else if (likelihoodScore === 3) {
+      setLikelihoodColor("bg-matrix-yellow");
     } else {
-      setFreqColor("bg-matrix-red");
+      setLikelihoodColor("bg-matrix-red");
     }
 
     if (sevScore >= 1 && sevScore <= 2) {
@@ -21,24 +21,24 @@ const RiskMatrix = ({ freqScore, sevScore, scaleUp = false }) => {
     } else {
       setSevColor("bg-matrix-red");
     }
-  }, [freqScore, sevScore]);
+  }, [likelihoodScore, sevScore]);
 
   const cellShader = (index) => {
     let column = index % 5;
     let row = Math.floor(index / 5);
     // Shades all cells in correct row
-    if (row === 5 - freqScore && column < sevScore - 1) {
-      return `${freqColor} opacity-40`;
+    if (row === 5 - likelihoodScore && column < sevScore - 1) {
+      return `${likelihoodColor} opacity-40`;
     }
 
     // Shades all cells in correct column
-    if (column === sevScore - 1 && row > 5 - freqScore) {
+    if (column === sevScore - 1 && row > 5 - likelihoodScore) {
       return `${sevColor} opacity-40`;
     }
 
     // Shades the correct cell with opacity at 1
-    if (row === 5 - freqScore && column === sevScore - 1) {
-      return freqScore > sevScore ? `${freqColor}` : `${sevColor}`;
+    if (row === 5 - likelihoodScore && column === sevScore - 1) {
+      return likelihoodScore > sevScore ? `${likelihoodColor}` : `${sevColor}`;
     }
     return "bg-gray-400";
   };

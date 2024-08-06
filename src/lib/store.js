@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import riskSlice from './selectedRiskSlice'
+import riskSlice from './riskSlice'
 
 export const makeStore = () => {
   return configureStore({

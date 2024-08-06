@@ -67,7 +67,7 @@ const MainReport = () => {
       <h3 className="text-2xl font-primary font-semibold">Risk Heatmap</h3>
       <div className="w-fit mx-auto mt-4 mb-20">
         <RiskMatrix
-          freqScore={selectedRisk.likelihood}
+          likelihoodScore={selectedRisk.likelihood}
           sevScore={selectedRisk.severity}
           scaleUp={true}
         />

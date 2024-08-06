@@ -3,7 +3,7 @@ import { useState } from "react";
 import Chip from "./Chip";
 import RiskMatrix from "./RiskMatrix";
 import { useSelector, useDispatch } from "react-redux";
-import { setSelectedRisk } from "@/lib/selectedRiskSlice";
+import { setSelectedRisk } from "@/lib/riskSlice";
 const RiskEntry = ({ risk }) => {
   const [hovering, setHovering] = useState(false);
   const selectedRisk = useSelector((state) => state.risk.selected);
@@ -60,7 +60,7 @@ const RiskEntry = ({ risk }) => {
         </div>
         {!selectedRisk && (
           <div className="mb-5">
-            <RiskMatrix freqScore={risk.likelihood} sevScore={risk.severity} />
+            <RiskMatrix likelihoodScore={risk.likelihood} sevScore={risk.severity} />
           </div>
         )}
       </div>

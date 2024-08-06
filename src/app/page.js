@@ -5,7 +5,7 @@ import MainReport from "@/components/MainReport";
 import RiskEntry from "@/components/RiskEntry";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchRiskData } from "@/lib/selectedRiskSlice";
+import { fetchRiskData } from "@/lib/riskSlice";
 
 export default function Home() {
   const { items, loading, error, selected } = useSelector(
@@ -17,71 +17,6 @@ export default function Home() {
   useEffect(() => {
     dispatch(fetchRiskData());
   }, [dispatch]);
-
-  const sampleRiskData = [
-    {
-      id: "1",
-      title: "National healthcare databases are compromised",
-      tags: ["Cybersecurity", "Healthcare", "Data Breach"],
-      risk_ranking: "1",
-      sevScore: 3,
-      freqScore: 5,
-      summary:
-        "This is a very long, if not unnecessarily long description of what this issue means exactly. If it were to be realized, healthcare would be inaccessible to many people, and the world would be a much sadder.",
-      regions: ["cn", "in", "us", "id", "pk", "br", "ng", "bd", "ru", "mx"],
-
-      references: [
-        {
-          title: "Cybersecurity and Infrastructure Security Agency",
-          link: "https://www.cisa.gov/",
-        },
-        {
-          title: "Healthcare and Public Health Sector",
-          link: "https://www.cisa.gov/healthcare-public-health-sector",
-        },
-      ],
-    },
-    {
-      id: "2",
-      title: "Sample Risk Entry 2",
-      tags: ["Tag1", "Tag2", "Tag3"],
-      risk_ranking: "2",
-      sevScore: 4,
-      freqScore: 2,
-      summary: "This is a sample summary for risk entry 2.",
-      regions: ["us", "ca", "uk"],
-      references: [
-        {
-          title: "Reference 1",
-          link: "https://www.example.com/reference1",
-        },
-        {
-          title: "Reference 2",
-          link: "https://www.example.com/reference2",
-        },
-      ],
-    },
-    {
-      id: "3",
-      title: "Sample Risk Entry 3",
-      tags: ["Tag4", "Tag5", "Tag6"],
-      risk_ranking: "3",
-      sevScore: 1,
-      freqScore: 3,
-      summary: "This is a sample summary for risk entry 3.",
-      regions: ["au", "nz", "jp"],
-      references: [
-        {
-          title: "Reference 3",
-          link: "https://www.example.com/reference3",
-        },
-        {
-          title: "Reference 4",
-          link: "https://www.example.com/reference4",
-        },
-      ],
-    },
-  ];
 
   return (
     <div>

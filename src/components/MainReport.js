@@ -3,9 +3,11 @@ import React from "react";
 import RiskMatrix from "./RiskMatrix";
 import Chip from "./Chip";
 import WorldMap, { regions } from "react-svg-worldmap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { clearSelectedRisk } from "@/lib/riskSlice";
 
 const MainReport = () => {
+  const dispatch = useDispatch();
   const selectedRisk = useSelector((state) => state.risk.selected);
   let regionData = [];
   if (selectedRisk.regions) {
@@ -17,9 +19,16 @@ const MainReport = () => {
 
   return (
     <div className="w-1/2 border h-[90.3vh] overflow-y-scroll px-8 bg-white shadow-sm pt-12">
+      <button
+        onClick={() => dispatch(clearSelectedRisk())}
+        className="z-50 float-right -mt-4"
+      >
+        ╳
+      </button>
       <h1 className="text-4xl font-primary font-medium my-2">
         {selectedRisk.title}
       </h1>
+
       {selectedRisk.industries && (
         <div className="flex flex-wrap my-2">
           {selectedRisk.industries.map((tag, index) => (

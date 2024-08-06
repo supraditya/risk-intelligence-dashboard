@@ -3,7 +3,7 @@ import { useState } from "react";
 import Chip from "./Chip";
 import RiskMatrix from "./RiskMatrix";
 import { useSelector, useDispatch } from "react-redux";
-import { setSelectedRisk } from "@/lib/riskSlice";
+import { setSelectedRisk, clearSelectedRisk } from "@/lib/riskSlice";
 const RiskEntry = ({ risk }) => {
   const [hovering, setHovering] = useState(false);
   const selectedRisk = useSelector((state) => state.risk.selected);
@@ -23,7 +23,7 @@ const RiskEntry = ({ risk }) => {
       {/* Used a niche UTF character for the close button to avoid svg, check if it renders on other machine web pages */}
       {selectedRisk && selectedRisk.id === risk.id && (
         <button
-          onClick={() => dispatch(setSelectedRisk(null))}
+          onClick={() => dispatch(clearSelectedRisk())}
           className="absolute z-50 mb-40"
         >
           ╳

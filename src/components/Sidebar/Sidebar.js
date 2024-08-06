@@ -6,7 +6,7 @@ import {
   setMinSeverity,
   addTopic,
   removeTopic,
-  clearTopics,
+  clearFilters,
 } from "@/lib/filtersSlice";
 import Slider from "./Slider";
 
@@ -54,7 +54,15 @@ const Sidebar = () => {
 
   return (
     <div className="fixed overflow-y-scroll h-[90.3vh] w-1/4 border bg-white shadow-sm px-4 py-2">
-      <h1 className="text-lg font-primary font-bold mt-2">Filters</h1>
+      <div className="flex justify-between items-center mt-2">
+        <h1 className="text-lg font-primary font-bold">Filters</h1>
+        <button
+          onClick={() => dispatch(clearFilters())}
+          className="border rounded-md border-matrix-yellow text-matrix-yellow px-2 py-1 hover:bg-matrix-yellow hover:text-white duration-75"
+        >
+          Reset Filters
+        </button>
+      </div>
       <h1 className="text-base font-primary mt-2">Minimum Impact Severity</h1>
       <Slider value={filters.minSeverity} valueUpdateAction={setMinSeverity} />
       <h1 className="text-base font-primary mt-2">Minimum Impact Likelihood</h1>

@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import MainReport from "@/components/MainReport";
 import RiskEntry from "@/components/RiskEntry";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchRiskData } from "@/lib/riskSlice";
 
@@ -13,11 +13,19 @@ export default function Home() {
   );
   const selectedTopics = useSelector((state) => state.filters.topics);
 
+  const minSeverity = useSelector((state) => state.filters.minSeverity);
+  const minLikelihood = useSelector((state) => state.filters.minLikelihood);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchRiskData());
   }, [dispatch]);
+
+  // Capitalizes the first letter of each word in a string
+  const toTitleCase = (str) => {
+    return str.replace(/\b(\w)/g, (char) => char.toUpperCase());
+  };
 
   return (
     <div>
@@ -29,7 +37,7 @@ export default function Home() {
             selected ? "w-1/2 px-4" : "w-full pl-8"
           } h-[90.3vh] overflow-y-scroll pt-6 flex  flex-col`}
         >
-          {selectedTopics.length > 0 && (
+          {selectedTopics.length > 0 ? (
             <div>
               <p className="text-2xl font-primary font-semibold">
                 Selected topics:
@@ -38,18 +46,33 @@ export default function Home() {
                 {selectedTopics.join(", ")}
               </p>
             </div>
+          ) : (
+            <p className="text-2xl font-primary italic">
+              No topics selected. Please select a topic from the sidebar to
+              begin.
+            </p>
           )}
-          <span className="font-primary font-semibold text-2xl">
+          <span className="font-secondary text-lg">
             {loading
               ? "Loading..."
               : items
-              ? items.length + " results found"
+              ? items.length + " total results found"
               : ""}
           </span>
 
           {!loading &&
             items &&
-            items.map((risk, index) => <RiskEntry key={index} risk={risk} />)}
+            items.map((risk, index) => {
+              //Firebase is currently storing the topics in lowercase, so we need to capitalize them to compare with filter topics list
+              const topicTitleCased = toTitleCase(risk.topic);
+              if (
+                risk.likelihood >= minSeverity &&
+                risk.severity >= minLikelihood &&
+                selectedTopics.includes(topicTitleCased)
+              ) {
+                return <RiskEntry key={index} risk={risk} />;
+              }
+            })}
         </div>
         {selected && <MainReport />}
       </main>

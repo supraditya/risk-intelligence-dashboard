@@ -66,8 +66,8 @@ export default function Home() {
               //Firebase is currently storing the topics in lowercase, so we need to capitalize them to compare with filter topics list
               const topicTitleCased = toTitleCase(risk.topic);
               if (
-                risk.likelihood >= minSeverity &&
-                risk.severity >= minLikelihood &&
+                risk.likelihood >= minLikelihood &&
+                risk.severity >= minSeverity &&
                 selectedTopics.includes(topicTitleCased)
               ) {
                 return <RiskEntry key={index} risk={risk} />;

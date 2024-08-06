@@ -11,7 +11,8 @@ export default function Home() {
   const { items, loading, error, selected } = useSelector(
     (state) => state.risk
   );
-  const [selectedTopics, setSelectedTopics] = useState([]);
+  const selectedTopics = useSelector((state) => state.filters.topics);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,10 +22,7 @@ export default function Home() {
   return (
     <div>
       <Navbar />
-      <Sidebar
-        selectedTopics={selectedTopics}
-        setSelectedTopics={setSelectedTopics}
-      />
+      <Sidebar />
       <main className="flex float-right justify-end h-[90.3vh] w-3/4 items-center overflow-y-hidden">
         <div
           className={`${
@@ -36,7 +34,9 @@ export default function Home() {
               <p className="text-2xl font-primary font-semibold">
                 Selected topics:
               </p>
-              <p className="text-xl font-primary mb-4">{selectedTopics.join(", ")}</p>
+              <p className="text-xl font-primary mb-4">
+                {selectedTopics.join(", ")}
+              </p>
             </div>
           )}
           <span className="font-primary font-semibold text-2xl">

@@ -1,5 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setMinLikelihood,
+  setMinSeverity,
+  addTopic,
+  removeTopic,
+  clearTopics,
+} from "@/lib/filtersSlice";
 import Slider from "./Slider";
 
 const topicsList = [
@@ -27,15 +35,20 @@ const topicsList = [
   "Succession Planning",
   "Third Parties",
   "Title IX",
-  "Workforce Management"
+  "Workforce Management",
 ];
 
-const Sidebar = ({ selectedTopics, setSelectedTopics }) => {
+const Sidebar = () => {
+  const dispatch = useDispatch();
+  const filters = useSelector((state) => state.filters);
+
   const handleCheckboxChange = (topic) => {
-    if (selectedTopics.includes(topic)) {
-      setSelectedTopics(selectedTopics.filter((item) => item !== topic));
+    if (!filters.topics.includes(topic)) {
+      // Add topic to list
+      dispatch(addTopic(topic));
     } else {
-      setSelectedTopics([...selectedTopics, topic]);
+      // Remove topic from list
+      dispatch(removeTopic(topic));
     }
   };
 
@@ -43,9 +56,12 @@ const Sidebar = ({ selectedTopics, setSelectedTopics }) => {
     <div className="fixed overflow-y-scroll h-[90.3vh] w-1/4 border bg-white shadow-sm px-4 py-2">
       <h1 className="text-lg font-primary font-bold mt-2">Filters</h1>
       <h1 className="text-base font-primary mt-2">Minimum Impact Severity</h1>
-      <Slider />
+      <Slider value={filters.minSeverity} valueUpdateAction={setMinSeverity} />
       <h1 className="text-base font-primary mt-2">Minimum Impact Likelihood</h1>
-      <Slider />
+      <Slider
+        value={filters.minLikelihood}
+        valueUpdateAction={setMinLikelihood}
+      />
       <h1 className="text-lg font-primary font-bold mt-2">Topics</h1>
       <div className="mt-2">
         {topicsList.map((topic, index) => (
@@ -53,7 +69,7 @@ const Sidebar = ({ selectedTopics, setSelectedTopics }) => {
             <input
               type="checkbox"
               id={topic}
-              checked={selectedTopics.includes(topic)}
+              checked={filters.topics.includes(topic)}
               onChange={() => handleCheckboxChange(topic)}
               className="mr-2"
             />

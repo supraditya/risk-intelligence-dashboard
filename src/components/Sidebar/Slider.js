@@ -1,13 +1,11 @@
 "use client";
-
-import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 // Slider thumb (selector) styling present in globals.css
-const Slider = () => {
-  const [value, setValue] = useState(1);
-
+const Slider = ({ value, valueUpdateAction }) => {
+  const dispatch = useDispatch();
   const handleChange = (event) => {
-    setValue(event.target.value);
+    dispatch(valueUpdateAction(Number(event.target.value)));
   };
 
   return (

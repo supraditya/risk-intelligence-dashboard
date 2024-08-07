@@ -3,18 +3,19 @@ import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import MainReport from "@/components/MainReport";
 import RiskEntry from "@/components/RiskEntry";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchRiskData } from "@/lib/riskSlice";
 
 export default function Home() {
-  const { items, loading, error, selected } = useSelector(
+  const { items, loading, selected } = useSelector(
     (state) => state.risk
   );
   const selectedTopics = useSelector((state) => state.filters.topics);
-
   const minSeverity = useSelector((state) => state.filters.minSeverity);
   const minLikelihood = useSelector((state) => state.filters.minLikelihood);
+
+  const [resultCount, setResultCount] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -26,6 +27,21 @@ export default function Home() {
   const toTitleCase = (str) => {
     return str.replace(/\b(\w)/g, (char) => char.toUpperCase());
   };
+
+  // To keep track of results found after filtering. Refactor if better solution is found
+  useEffect(() => {
+    if (items) {
+      const filteredItems = items.filter((risk) => {
+        const topicTitleCased = toTitleCase(risk.topic);
+        return (
+          risk.likelihood >= minLikelihood &&
+          risk.severity >= minSeverity &&
+          selectedTopics.includes(topicTitleCased)
+        );
+      });
+      setResultCount(filteredItems.length);
+    }
+  }, [selectedTopics, minSeverity, minLikelihood]);
 
   return (
     <div>
@@ -53,11 +69,11 @@ export default function Home() {
             </p>
           )}
           <span className="font-secondary text-lg">
-            {loading
-              ? "Loading..."
-              : items
-              ? items.length + " total results found"
-              : ""}
+            {loading && "Loading..."}
+            {!loading &&
+              items &&
+              selectedTopics.length > 0 &&
+              resultCount + " results found"}
           </span>
 
           {!loading &&

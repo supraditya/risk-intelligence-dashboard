@@ -32,6 +32,7 @@ const riskSlice = createSlice({
     },
     clearSelectedRisk: (state) => {
       state.selected = null;
+      state.selectedRank = null;
     },
   },
   extraReducers: (builder) => {

@@ -1,10 +1,12 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setMinLikelihood,
   setMinSeverity,
   addTopic,
+  addAllTopics,
+  removeAllTopics,
   removeTopic,
   clearFilters,
 } from "@/lib/filtersSlice";
@@ -42,6 +44,8 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   const filters = useSelector((state) => state.filters);
 
+  const [selectAllState, setSelectAllState] = useState(false);
+
   const handleCheckboxChange = (topic) => {
     if (!filters.topics.includes(topic)) {
       // Add topic to list
@@ -49,6 +53,16 @@ const Sidebar = () => {
     } else {
       // Remove topic from list
       dispatch(removeTopic(topic));
+    }
+  };
+
+  const handleSelectAll = () => {
+    if (selectAllState) {
+      dispatch(removeAllTopics());
+      setSelectAllState(false);
+    } else {
+      dispatch(addAllTopics(topicsList));
+      setSelectAllState(true);
     }
   };
 
@@ -72,6 +86,18 @@ const Sidebar = () => {
       />
       <h1 className="text-lg font-primary font-bold mt-2">Topics</h1>
       <div className="mt-2">
+        <div key="Select all" className="flex items-center mb-4">
+          <input
+            type="checkbox"
+            id="Select All"
+            checked={selectAllState}
+            onChange={handleSelectAll}
+            className="mr-2"
+          />
+          <label htmlFor="Select All" className="font-primary font-semibold text-sm">
+            Select All
+          </label>
+        </div>
         {topicsList.map((topic, index) => (
           <div key={index} className="flex items-center mb-2">
             <input

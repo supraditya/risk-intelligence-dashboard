@@ -19,6 +19,12 @@ const filtersSlice = createSlice({
     addTopic: (state, action) => {
       state.topics.push(action.payload);
     },
+    addAllTopics: (state, action) => {
+      state.topics = action.payload;
+    },
+    removeAllTopics: (state) => {
+      state.topics = [];
+    },
     removeTopic: (state, action) => {
       state.topics = state.topics.filter((topic) => topic !== action.payload);
     },
@@ -30,7 +36,14 @@ const filtersSlice = createSlice({
   },
 });
 
-export const { setMinLikelihood, setMinSeverity, addTopic, removeTopic, clearFilters } =
-  filtersSlice.actions;
+export const {
+  setMinLikelihood,
+  setMinSeverity,
+  addTopic,
+  addAllTopics,
+  removeAllTopics,
+  removeTopic,
+  clearFilters,
+} = filtersSlice.actions;
 
 export default filtersSlice.reducer;

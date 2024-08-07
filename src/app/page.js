@@ -8,14 +8,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchRiskData } from "@/lib/riskSlice";
 
 export default function Home() {
-  const { items, loading, selected } = useSelector(
-    (state) => state.risk
-  );
+  const { items, loading, selected } = useSelector((state) => state.risk);
   const selectedTopics = useSelector((state) => state.filters.topics);
   const minSeverity = useSelector((state) => state.filters.minSeverity);
   const minLikelihood = useSelector((state) => state.filters.minLikelihood);
 
   const [resultCount, setResultCount] = useState(0);
+  const [filteredItems, setFilteredItems] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -39,7 +38,10 @@ export default function Home() {
           selectedTopics.includes(topicTitleCased)
         );
       });
+      // Sort the filtered items by risk score
+      filteredItems.sort((a, b) => b.risk_score - a.risk_score);
       setResultCount(filteredItems.length);
+      setFilteredItems(filteredItems);
     }
   }, [selectedTopics, minSeverity, minLikelihood]);
 
@@ -75,7 +77,13 @@ export default function Home() {
               selectedTopics.length > 0 &&
               resultCount + " results found"}
           </span>
+          {!loading &&
+            items &&
+            filteredItems.map((risk, index) => {
+              return <RiskEntry key={index} rank={index+1} risk={risk} />;
+            })}
 
+          {/* 
           {!loading &&
             items &&
             items.map((risk, index) => {
@@ -88,7 +96,7 @@ export default function Home() {
               ) {
                 return <RiskEntry key={index} risk={risk} />;
               }
-            })}
+            })} */}
         </div>
         {selected && <MainReport />}
       </main>

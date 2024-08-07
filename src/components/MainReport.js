@@ -2,13 +2,18 @@
 import React from "react";
 import RiskMatrix from "./RiskMatrix";
 import Chip from "./Chip";
-import WorldMap, { regions } from "react-svg-worldmap";
+import WorldMap from "react-svg-worldmap";
 import { useSelector, useDispatch } from "react-redux";
 import { clearSelectedRisk } from "@/lib/riskSlice";
 
 const MainReport = () => {
   const dispatch = useDispatch();
   const selectedRisk = useSelector((state) => state.risk.selected);
+
+  // The reason rank is stored separated is because it is dynamically calculated based on risk score of entries displayed
+  // after filtering
+
+  const selectedRiskRank = useSelector((state) => state.risk.selectedRank); 
   let regionData = [];
   if (selectedRisk.regions) {
     // region data formatted to fit WorldMap component
@@ -38,7 +43,7 @@ const MainReport = () => {
       )}
       <div className="flex justify-around my-8 space-x-6">
         <div className="text-center">
-          <p className="text-5xl font-primary">#{selectedRisk.likelihood}</p>
+          <p className="text-5xl font-primary">#{selectedRiskRank}</p>
           <p className="text-xl font-primary">Risk Ranking</p>
         </div>
         <div className="text-center">

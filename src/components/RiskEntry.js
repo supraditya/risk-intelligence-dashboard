@@ -4,12 +4,12 @@ import Chip from "./Chip";
 import RiskMatrix from "./RiskMatrix";
 import { useSelector, useDispatch } from "react-redux";
 import { setSelectedRisk, clearSelectedRisk } from "@/lib/riskSlice";
-const RiskEntry = ({ risk }) => {
+const RiskEntry = ({ rank, risk }) => {
   const [hovering, setHovering] = useState(false);
   const selectedRisk = useSelector((state) => state.risk.selected);
 
   const dispatch = useDispatch();
-  
+
   return (
     <div
       className={`${
@@ -31,15 +31,15 @@ const RiskEntry = ({ risk }) => {
       )}
       <div
         className="flex items-center justify-around w-full"
-        onClick={() => dispatch(setSelectedRisk(risk))}
+        onClick={() =>
+          dispatch(setSelectedRisk({ selected: risk, rank: rank }))
+        }
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={() => {
           setHovering(false);
         }}
       >
-        <p className="text-4xl font-primary text-center font-bold">
-          {risk.likelihood}
-        </p>
+        <p className="text-4xl font-primary text-center font-bold">{rank}</p>
         <div className={selectedRisk ? "w-4/5" : "w-2/3"}>
           <p
             className={`${
@@ -51,16 +51,22 @@ const RiskEntry = ({ risk }) => {
           <p className="font-secondary text-base line-clamp-2">
             {risk.summary}
           </p>
-          {risk.industries && risk.industries.map((tag, index) => {
-            if (selectedRisk && selectedRisk.id === risk.id) {
-              return <Chip key={index} text={tag} selected={true} oneline={true} />;
-            }
-            return <Chip key={index} text={tag} oneline={true} />;
-          })}
+          {risk.industries &&
+            risk.industries.map((tag, index) => {
+              if (selectedRisk && selectedRisk.id === risk.id) {
+                return (
+                  <Chip key={index} text={tag} selected={true} oneline={true} />
+                );
+              }
+              return <Chip key={index} text={tag} oneline={true} />;
+            })}
         </div>
         {!selectedRisk && (
           <div className="mb-5">
-            <RiskMatrix likelihoodScore={risk.likelihood} sevScore={risk.severity} />
+            <RiskMatrix
+              likelihoodScore={risk.likelihood}
+              sevScore={risk.severity}
+            />
           </div>
         )}
       </div>

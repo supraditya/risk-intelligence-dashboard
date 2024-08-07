@@ -66,12 +66,17 @@ const Sidebar = () => {
     }
   };
 
+  const handleClearFilters = () => {
+    setSelectAllState(false);
+    dispatch(clearFilters());
+  };
+
   return (
     <div className="fixed overflow-y-scroll h-[90.3vh] w-1/4 border bg-white shadow-sm px-4 py-2">
       <div className="flex justify-between items-center mt-2">
         <h1 className="text-lg font-primary font-bold">Filters</h1>
         <button
-          onClick={() => dispatch(clearFilters())}
+          onClick={handleClearFilters}
           className="border rounded-md border-matrix-yellow text-matrix-yellow px-2 py-1 hover:bg-matrix-yellow hover:text-white duration-75"
         >
           Reset Filters
@@ -94,7 +99,10 @@ const Sidebar = () => {
             onChange={handleSelectAll}
             className="mr-2"
           />
-          <label htmlFor="Select All" className="font-primary font-semibold text-sm">
+          <label
+            htmlFor="Select All"
+            className="font-primary font-semibold text-sm"
+          >
             Select All
           </label>
         </div>

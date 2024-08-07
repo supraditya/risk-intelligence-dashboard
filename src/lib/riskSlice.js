@@ -23,10 +23,12 @@ const riskSlice = createSlice({
     loading: false,
     error: null,
     selected: null,
+    selectedRank: null,
   },
   reducers: {
     setSelectedRisk: (state, action) => {
-      state.selected = action.payload;
+      state.selected = action.payload.selected;
+      state.selectedRank = action.payload.rank;
     },
     clearSelectedRisk: (state) => {
       state.selected = null;

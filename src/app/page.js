@@ -82,21 +82,6 @@ export default function Home() {
             filteredItems.map((risk, index) => {
               return <RiskEntry key={index} rank={index+1} risk={risk} />;
             })}
-
-          {/* 
-          {!loading &&
-            items &&
-            items.map((risk, index) => {
-              //Firebase is currently storing the topics in lowercase, so we need to capitalize them to compare with filter topics list
-              const topicTitleCased = toTitleCase(risk.topic);
-              if (
-                risk.likelihood >= minLikelihood &&
-                risk.severity >= minSeverity &&
-                selectedTopics.includes(topicTitleCased)
-              ) {
-                return <RiskEntry key={index} risk={risk} />;
-              }
-            })} */}
         </div>
         {selected && <MainReport />}
       </main>

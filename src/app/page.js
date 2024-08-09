@@ -80,7 +80,7 @@ export default function Home() {
           {!loading &&
             items &&
             filteredItems.map((risk, index) => {
-              return <RiskEntry key={index} rank={index+1} risk={risk} />;
+              return <RiskEntry key={index} rank={index + 1} risk={risk} />;
             })}
         </div>
         {selected && <MainReport />}
